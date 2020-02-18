@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Acquapura.DataAccess.Delivery>
+
+@{
+    ViewBag.Title = "List";
+    Layout = null;
+}
+<div class="card">
+    <div class="card-header">
+        @*<button type="button" class="btn waves-effect waves-light btn-rounded  btn btn-success btn-sm" onclick="OpenModelPopup(this)" data="/Delivery/Create/">
+            <i class="ti-plus" aria-hidden="true"></i> Create New
+        </button>*@
+    </div>
+    <div class="card-body">
+        <table class="table table thead" id="dataTables-example">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Delivered</th>
+                    <th>Received</th>
+                    <th>Balance</th>
+                    <th>Cash Received</th>
+                    <th>Cash Balance</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td name="date">
+                        @{
+                            if (item.Date.HasValue)
+                            {
+                                var date = item.Date.Value.ToString("dd MMM yyyy, h:mm tt");
+                                <label>@date</label>}
+                        }
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Delivered)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Received)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Balance)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CashBalance)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CashReceived)
+                    </td>
+                    <td>
+                        <button type="button" class="btn waves-effect waves-light btn-rounded  btn btn-info btn-sm" onclick="OpenModelPopup(this)" data="/Delivery/Edit/@item.ID">
+                            <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                        </button>
+
+                        <button type="button" class="btn waves-effect waves-light btn-rounded  btn btn-danger btn-sm" onclick="OpenModelPopup(this)" data="/Delivery/Delete/@item.ID">
+                            <i class="fa fa-pencil" aria-hidden="true"></i> Delete
+                        </button>
+                    </td>
+                </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script>
+
+    "use strict";
+    $(document).on('ready', function () {
+        $('#dataTables-example').DataTable({
+            responsive: true,
+            pageLength: 10,
+            sPaginationType: "full_numbers",
+            oLanguage: {
+                oPaginate: {
+                    sFirst: "<<",
+                    sPrevious: "<",
+                    sNext: ">",
+                    sLast: ">>"
+                }
+            }
+        });
+    });
+</script>

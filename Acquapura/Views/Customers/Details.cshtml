@@ -1,0 +1,147 @@
+﻿@model CoffeeCafe.DataAccess.Customer
+
+@{
+    ViewBag.Title = "Details";
+    Layout = null;
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-16 col-xs-16 text-center">
+                    <h4>Customer</h4>
+                    <small>View Customer Detail Here</small>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-16 col-xs-16">
+                <div class="float-right mb-3">
+                    <i class="fa fa-calendar"></i>
+                    <b>@Html.Label("Creation Date:", htmlAttributes: new { @class = "control-label" })</b>
+                    @if (Model.CreatedOn.HasValue)
+                    {
+                        var date = Model.CreatedOn.Value.ToString("dd MMM yyyy, h:mm tt");
+                        <label class="control-label" readonly="readonly">@date</label>
+                    }
+                    else
+                    {
+                        <label class="control-label" readonly="readonly"> - </label>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-16 col-sm-16">
+                @if (Model.CustomerImage != null)
+                {
+                    <div class="col-md-16 col-sm-16 text-center" id="DivCustomerImageUpload" style="display:none">
+                        <span id="OpenImgUpload">
+                            <i class="fa fa-save fa-2x"></i>
+                            <br />
+                            Upload file ...
+                        </span>
+
+                        <input type="file" name="CustomerImageEdit" style="display:none" />
+                    </div>
+                        <div class="col-md-16 col-sm-16" id="DivCustomerImageView">
+                            @Html.HiddenFor(model => model.CustomerImage)
+                            <img src="@Model.CustomerImage" class="customer-logo-edit" />
+                            @*<button type="button" class="btn waves-effect waves-light btn-rounded btn btn-danger btn-sm center-block" onclick="DeleteCustomerImage()" style="margin: 5px auto;display: block;" id="anc-delete-sports-category-logo-image">
+                                <i class="fa fa-trash"></i> Delete
+                            </button>*@
+                        </div>
+                }
+                else
+                {
+                    <span id="OpenImgUpload">
+                        <i class="fa fa-save fa-2x"></i>
+                    </span>
+                        <input type="file" name="CustomerImageEdit" style="display:none" required="required" />
+
+                }
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="col-md-16 col-sm-16 col-lg-8">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CustomerName, "Customer Name", htmlAttributes: new { @class = "control-label" })
+                    <div class="input-group mb-3">
+                        <label class="form-control" readonly="readonly">@Model.CustomerName</label>
+                        @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-user"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 col-sm-16 col-lg-8">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CustomerContactNo, "Contact #", htmlAttributes: new { @class = "control-label" })
+                    <div class="input-group mb-3">
+                        <label class="form-control" readonly="readonly">@Model.CustomerContactNo</label>
+                        @Html.ValidationMessageFor(model => model.CustomerContactNo, "", new { @class = "text-danger" })
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 col-sm-16">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CustomerEmail, "Email", htmlAttributes: new { @class = "control-label" })
+                    <div class="input-group mb-3">
+                        <label class="form-control" readonly="readonly">@Model.CustomerEmail</label>
+                        @Html.ValidationMessageFor(model => model.CustomerEmail, "", new { @class = "text-danger" })
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 col-sm-16">
+                <label class="control-label">City / State</label>
+                <div class="input-group mb-3">
+                    @if (Model.City != null)
+                    {
+                        <label class="form-control" readonly="readonly">@Model.City.CityName</label>
+                    }
+                    else
+                    {
+                        <label class="form-control" readonly="readonly">-</label>
+                    }
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-flag"></i></span></div>
+                </div>
+            </div>
+            <div class="col-md-16 col-sm-16">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="control-label">Address</label>
+                        <div class="input-group mb-3">
+                            @Html.TextAreaFor(model => model.Address, new { @class = "form-control", @readonly = "readonly", @rows = "3" })
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger", @placeholder = "Enter address here ..." })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="card-footer text-muted">
+        <div class="row">
+            <div class="col-md-12  col-xs-12">
+                <button type="button" class="btn waves-effect waves-light btn-rounded btn btn-warning btn-sm float-left" data-dismiss="modal">
+                    <i class="glyphicon glyphicon-backward" aria-hidden="true"></i> Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

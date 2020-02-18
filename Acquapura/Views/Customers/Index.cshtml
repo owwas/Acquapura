@@ -1,0 +1,196 @@
+﻿@model IEnumerable<Acquapura.DataAccess.Customer>
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- spinkit-master CSS -->
+<link rel="stylesheet" href="@Url.ContentVersioned("~/Assets/vendor/SpinKit-master/css/spinkit.css")" type="text/css">
+
+@*<link href="@Url.ContentVersioned("~/Assets/styles/ViewCss/CustomerCRUD.css")" rel="stylesheet" />*@
+@*<div class="wrapper-content">*@
+<div>
+	<div class="container-fluid">
+		@*<div class="row ">
+			<div class="col-sm-16">
+				<ol class="breadcrumb float-right ">
+					<li class="breadcrumb-item"><a href="/Admin/Index"> Dashboard</a></li>
+					<li class="breadcrumb-item active">Customers</li>
+				</ol>
+			</div>
+		</div>*@
+		<div class="row  align-items-center justify-content-between">
+			<div class="col-16 col-sm-16 page-title text-center">
+				<h3>Customers</h3>
+				<p>Manage Customers Here ...</p>
+			</div>
+		</div>
+		<!-- DataTables Responsive CSS -->
+		<link href="@Url.ContentVersioned("~/Assets/vendor/datatables/css/dataTables.bootstrap4.css")" rel="stylesheet">
+		<link href="@Url.ContentVersioned("~/Assets/vendor/datatables/css/responsive.dataTables.min.css")" rel="stylesheet">
+
+		<!-- autocomplete CSS -->
+		<link rel="stylesheet" href="@Url.ContentVersioned("~/Assets/vendor/EasyAutocomplete-1.3.5/easy-autocomplete.css")" type="text/css">
+
+		@if (ViewBag.SuccessMessage != null)
+		{
+			<div class="notes notes-success text-center">
+				<i class="ti-user"></i> @ViewBag.SuccessMessage
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true"></span> </button>
+			</div>}
+		else if (ViewBag.ErrorMessage != null)
+		{
+			<div class="notes notes-danger text-center">
+				<i class="ti-user"></i> @ViewBag.ErrorMessage
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true"></span> </button>
+			</div>}
+		<div class="row">
+			<div class="col-md-16 col-sm-16">
+				<div id="DivMessage"></div>
+			</div>
+		</div>
+
+
+		<div class="row" style="justify-content:center;">
+			<div class="col-md-8 col-lg-8 col-xl-3">
+				<div class="activity-block danger">
+					<div class="media">
+						<div class="media-body">
+							<h5><span class="spincreament" id="countuser">@ViewBag.Delivered</span></h5>
+							<p>Delivered</p>
+						</div>
+						<i class="fa fa-user"></i>
+					</div>
+					<br>
+					<div class="media">
+						@*<div class="media-body"><span class="progress-heading">Monthly progress</span></div>*@
+						<span><span class="dynamicsparkline">Loading..</span> </span>
+					</div>
+					<div class="row">
+						<div class="progress ">
+							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span class="trackerball"></span></div>
+						</div>
+					</div>
+					<i class="bg-icon text-center fa fa-user"></i>
+				</div>
+			</div>
+			<div class="col-md-8 col-lg-8 col-xl-3">
+				<div class="activity-block success">
+					<div class="media">
+						<div class="media-body">
+							<h5><span class="spincreament" id="countcustomer">@ViewBag.Received</span></h5>
+							<p>Received</p>
+						</div>
+						<i class="fa fa-users"></i>
+					</div>
+					<br>
+					<div class="media">
+						@*<div class="media-body"><span class="progress-heading">Monthly progress</span></div>*@
+						<span><span class="dynamicsparkline">Loading..</span> </span>
+					</div>
+					<div class="row">
+						<div class="progress ">
+							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"><span class="trackerball"></span></div>
+						</div>
+					</div>
+					<i class="bg-icon text-center fa fa-users"></i>
+				</div>
+			</div>
+			<div class="col-md-8 col-lg-8 col-xl-3">
+				<div class="activity-block primary">
+					<div class="media">
+						<div class="media-body">
+							<h5><span class="spincreament" id="ordercustomer">@ViewBag.Balance</span></h5>
+							<p>Balance</p>
+						</div>
+						<i class="fa fa-cart-arrow-down"></i>
+					</div>
+					<br>
+					<div class="media">
+						@*<div class="media-body"><span class="progress-heading">Monthly progress</span></div>*@
+						<span><span class="dynamicsparkline">Loading..</span> </span>
+					</div>
+					<div class="row">
+						<div class="progress ">
+							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"><span class="trackerball"></span></div>
+						</div>
+					</div>
+					<i class="bg-icon text-center fa fa-cart-arrow-down"></i>
+				</div>
+			</div>
+			<div class="col-md-8 col-lg-8 col-xl-3">
+				<div class="activity-block warning">
+					<div class="media">
+						<div class="media-body">
+							<h5><span class="spincreament" id="countcustomer">@ViewBag.CashReceived</span></h5>
+							<p>Cash Received</p>
+						</div>
+						<i class="fa fa-cubes"></i>
+					</div>
+					<br>
+					<div class="media">
+						@*<div class="media-body"><span class="progress-heading">Monthly progress</span></div>*@
+						<span><span class="dynamicsparkline">Loading..</span> </span>
+					</div>
+					<div class="row">
+						<div class="progress ">
+							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"><span class="trackerball"></span></div>
+						</div>
+					</div>
+					<i class="bg-icon text-center fa fa-cubes"></i>
+				</div>
+			</div>
+			<div class="col-md-8 col-lg-8 col-xl-3">
+				<div class="activity-block danger">
+					<div class="media">
+						<div class="media-body">
+							<h5><span class="spincreament" id="countcustomer">@ViewBag.CashBalance</span></h5>
+							<p>Cash Balance</p>
+						</div>
+						<i class="fa fa-tag"></i>
+					</div>
+					<br>
+					<div class="media">
+						@*<div class="media-body"><span class="progress-heading">Monthly progress</span></div>*@
+						<span><span class="dynamicsparkline">Loading..</span> </span>
+					</div>
+					<div class="row">
+						<div class="progress ">
+							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"><span class="trackerball"></span></div>
+						</div>
+					</div>
+					<i class="bg-icon text-center fa fa-cubes"></i>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+
+			<div class="col-sm-16" id="replacetarget">
+				@{ Html.RenderAction("List", "Customers"); }
+			</div>
+		</div>
+		<!-- DataTables JavaScript -->
+		<script src="@Url.ContentVersioned("~/Assets/vendor/datatables/js/jquery.dataTables.min.js")"></script>
+		<script src="@Url.ContentVersioned("~/Assets/vendor/datatables/js/dataTables.bootstrap4.js")"></script>
+		<script src="@Url.ContentVersioned("~/Assets/vendor/datatables/js/dataTables.responsive.min.js")"></script>
+		<script src="@Url.ContentVersioned("~/Assets/scripts/ModalPopup.js")"></script>
+		@*<script src="@Url.ContentVersioned("~/Assets/scripts/ViewScripts/CustomersCRUD.js")"></script>*@
+		<!-- autocomplete js-->
+		<script type="text/javascript" src="@Url.ContentVersioned("~/Assets/vendor/EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js")"></script>
+
+	</div>
+</div>
+<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div id='myModalContent'>
+				<div class="load8 load-wrapper"><div class="loader">Loading...</div></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Circular chart progress js -->
+<script src="@Url.ContentVersioned("~/Assets/vendor/cicular_progress/circle-progress.min.js")" type="text/javascript"></script>

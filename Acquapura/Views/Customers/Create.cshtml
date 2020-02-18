@@ -1,0 +1,88 @@
+﻿@model Acquapura.DataAccess.Customer
+@{
+	ViewBag.Title = "Create";
+	Layout = null;
+}
+@using (Html.BeginForm("Create", "Customers", FormMethod.Post, new { enctype = "multipart/form-data", id = "Customerfrm" }))
+{
+	@Html.AntiForgeryToken()
+
+	<div class="card">
+		<div class="card-header">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-16 col-xs-16 text-center">
+						<h4><i class="fa fa-user" area-hidden="true"></i> Customer</h4>
+						<small>Add Customer Here</small>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card-body">
+			<div class="notes notes-danger text-center" id="divMessage" style="display:none"></div>
+			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+			<div class="row">
+				<div class="col-md-16 col-sm-16">
+					<div class="form-group">
+						@Html.LabelFor(model => model.Name, "Customer Name", htmlAttributes: new { @class = "control-label" })
+						<div class="input-group mb-3">
+							@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter customer name here ...", required = "required" } })
+							@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fa fa-user"></i></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8 col-sm-16">
+					<div class="form-group">
+						@Html.LabelFor(model => model.Phone, "Contact #", htmlAttributes: new { @class = "control-label" })
+						<div class="input-group mb-3">
+							@Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter contact # here ...", required = "required" } })
+							@Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fa fa-phone"></i></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8 col-sm-16">
+					<div class="form-group">
+						@Html.LabelFor(model => model.CodeNo, "CodeNo", htmlAttributes: new { @class = "control-label" })
+						<div class="input-group mb-3">
+							@Html.EditorFor(model => model.CodeNo, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter email here ...", required = "required"} })
+							@Html.ValidationMessageFor(model => model.CodeNo, "", new { @class = "text-danger" })
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fa fa-envelope"></i></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-16 col-sm-16">
+					<div class="form-group">
+						<div class="form-group">
+							<label class="control-label">Address</label>
+							<div class="input-group mb-3">
+								@Html.TextAreaFor(model => model.Address, new { @class = "form-control", @rows = "3", placeholder = "Enter address name here ...", required = "required" })
+								@Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger", @placeholder = "Enter address here ..." })
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card-footer text-muted">
+			<div class="row">
+				<div class="col-md-16  col-xs-16">
+					<button type="button" class="btn waves-effect waves-light btn-rounded btn btn-warning btn-sm float-left" data-dismiss="modal">
+						Close
+					</button>
+					<button type="submit" class="btn waves-effect waves-light btn-rounded btn btn-primary btn-sm float-right">
+						Add
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+}

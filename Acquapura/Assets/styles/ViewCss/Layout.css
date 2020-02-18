@@ -1,0 +1,43 @@
+﻿
+header .navbar {
+    background: #262b35;
+}
+
+.color {
+    color: white;
+}
+
+body > .sidebar-right, body > .sidebar-left, body > .container > .sidebar-right, body > .container > .sidebar-left {
+    background: #262b35;
+    color: white;
+}
+
+    body > .sidebar-left .nav-link i.left-icon, body > .container > .sidebar-left .nav-link i.left-icon {
+        color: white;
+    }
+
+    body > .sidebar-left .nav-link, body > .container > .sidebar-left .nav-link {
+        color: white;
+    }
+
+    body > .sidebar-left .nav li .nav li .nav-link, body > .container > .sidebar-left .nav li .nav li .nav-link {
+        color: white;
+    }
+
+    body > .sidebar-left .menudropdown.show, body > .container > .sidebar-left .menudropdown.show {
+        color: white;
+    }
+
+    .gradient, .dropdown-item:focus, .dropdown-item:hover, body > .sidebar-left .nav-link.active, body > .sidebar-left .nav-link:hover, body > .container > .sidebar-left .nav-link.active, body > .container > .sidebar-left .nav-link:hover, .media-list > .media.new.active, .media-list > .media.new:hover, .media-list > .media:hover, .media-list > .media.active, .search-list > .media:hover, .member-list .media:hover, .message-container div .media:hover, .nav-tabs .nav-link.active, .fc-unthemed td.fc-widget-content.fc-today, .invoice.card .card-header, .invoice.card .card-footer {
+           background: linear-gradient(to right, #27b6b9 0%, #27b6b9 100%);
+    }
+
+.user-menu-items .btn-group .btn {
+    background: #262b35;
+    color: #ffffff;
+}
+
+    .user-menu-items .btn-group .btn .media-body span {
+        color: #ffffff;
+    }
+  
